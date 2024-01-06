@@ -1,15 +1,21 @@
 const express = require('express')
-const app = express()
+const cors = require("cors")
+const { Sequelize, DataTypes } = require('sequelize');
+const mysql = require("mysql2")
+
+const PORT = 3000
+
 const routAuth = require('./routes/auth')
 const routProduk = require('./routes/list-produk')
 
+const config = require('./config');
+const sequelize = new Sequelize(config.development)
+
+const app = express()
 app.use(routAuth)
 app.use(routProduk)
-
-const cors = require("cors")
 app.use(cors())
 
-const PORT = 3000
 
 app.get('/', (req,res) => {
     res.send('Welcome to the system!')
