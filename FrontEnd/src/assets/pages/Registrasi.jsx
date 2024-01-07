@@ -1,8 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../components/Button/Button";
+import axios from "axios";
 
 export default function Registrasi() {
+    const RegisterUserAccount = function () {
+        console.log("AAAAAAAAAAAAAAAAAAAAA")
+        const token = localStorage.getItem('jwtToken');
+
+        const username = document.getElementById("fullname").value
+        const email = document.getElementById("email").value
+        const noHp = document.getElementById("noHandphone").value
+        const password = document.getElementById("password").value
+
+        const User = {
+            name: username,
+            password: password,
+            no_hp: noHp,
+            email: email
+        }
+
+        axios.post("http://localhost:3000/signup", User)
+            .then(response => {
+                console.log('Server response:', response.data);
+            })
+            .catch(error => {
+                console.error('Error during registration:', error);
+            });
+    }
+
     return (
         <>
             <article className="main-register">
@@ -29,7 +55,8 @@ export default function Registrasi() {
                             <input type="password" id="password" placeholder="Masukkan Password" />
                         </div>
                     </form>
-                    <Button className="btn-register">Daftar Akun</Button>
+                    <Button type="button" className="btn-register" onClick={RegisterUserAccount}>Daftar Akun</Button>
+
                     <div className="already-account">
                         <span>
                             Sudah memiliki akun? <NavLink to="/login">Login</NavLink>
