@@ -1,8 +1,30 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import Button from "../components/Button/Button";
 
 export default function Login() {
+    const LoginAccount = (event) =>{
+        event.preventDefault();
+
+        const username = document.getElementById("username").value
+        const password = document.getElementById("password").value
+
+        const userInformation = {
+            username : username,
+            password : password
+        }
+
+        axios.post("http://localhost:3000/login", userInformation)
+            .then(response => {
+                console.log('Server response:');
+            })
+            .catch(error => {
+                console.error('Error during registration:', error);
+            });
+
+    }
+
     return (
         <React.Fragment>
             <article className="main-login">
@@ -21,7 +43,7 @@ export default function Login() {
                             <input type="password" id="password" placeholder="Masukkan Password" />
                         </div>
                     </form>
-                    <Button className="btn-login">Masuk</Button>
+                    <button className="btn-login" onClick= {LoginAccount}>Masuk</button>
                     <div className="dont-account">
                         <span>
                             Tidak punya akun? <NavLink to="/register">Register</NavLink>

@@ -12,9 +12,9 @@ const config = require('./config');
 const sequelize = new Sequelize(config.development)
 
 const app = express()
+app.use(cors())
 app.use(routAuth)
 app.use(routProduk)
-app.use(cors())
 
 
 app.get('/', (req,res) => {
