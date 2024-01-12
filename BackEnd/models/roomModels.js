@@ -1,21 +1,21 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/dataBase.js");
 
-const User = db.define(
-  "User",
+const Room = db.define(
+  "Room",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    price: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    status: {
       type: DataTypes.STRING,
-      allowNull: false,
+      defaultValue: "available",
     },
   },
   {
@@ -23,7 +23,7 @@ const User = db.define(
   }
 );
 
-export default User;
+export default Room;
 
 (async () => {
   await db.sync();

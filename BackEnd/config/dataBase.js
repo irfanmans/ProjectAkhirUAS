@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+const { Sequelize } = require("sequelize");
 
 const db = new Sequelize("namadatabase", "root", "password_kalau_ada", {
   host: "localhost",
