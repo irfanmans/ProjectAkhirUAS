@@ -11,7 +11,7 @@ export const getUsers = async (req, res) => {
   }
 };
 
-export const getUser = async (req, res) => {
+export const userLogin = async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
@@ -20,7 +20,7 @@ export const getUser = async (req, res) => {
     });
 
     if (!user) {
-      res.send(404);
+      res.status(404);
       return;
     }
 
@@ -29,18 +29,19 @@ export const getUser = async (req, res) => {
       user.password
     );
     if (!isValidPassowrd) {
-      res.send(401);
+      res.status(401);
       return;
     }
 
     const token = jwt.sign({ id: user.id }, "rahasia");
     res.json({ token });
   } catch (err) {
-    res.status(400).json(err);
+    console.error(err);
+    res.status(400);
   }
 };
 
-export const createUser = async (req, res) => {
+export const userRegister = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     await User.create({
@@ -49,6 +50,7 @@ export const createUser = async (req, res) => {
     });
     res.status(201).json({ msg: "User Created" });
   } catch (err) {
-    res.status(500).json({ msg: "Error Creating User", error: err });
+    console.error(err);
+    res.status(500).json({ msg: "Error Creating User" });
   }
 };
