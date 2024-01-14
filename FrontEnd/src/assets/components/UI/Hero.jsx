@@ -1,8 +1,25 @@
 import React from "react";
 import Button from "../Button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Hero() {
+    const navigate = useNavigate()
+    
+    const authenticateToken = async () =>{
+    try 
+    {
+     const response = await axios.get("http://localhost:3000/", {
+        timeout: 5000
+      });
+
+      navigate('/addbook');
+    }
+    catch (error)
+    {
+        navigate('/login')
+    }
+  }
     return (
         <>
             <div className="first-screen">
@@ -11,10 +28,8 @@ export default function Hero() {
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat suscipit non laborum cum ut facere numquam ducimus praesentium tempore voluptates repellendus nesciunt, minus similique voluptas soluta, corrupti
                         quaerat eaque a?
-                    </p>
-                    <NavLink to="/addbook">
-                        <Button>Pesan Kamar</Button>
-                    </NavLink>
+                    </p>              
+                        <Button onClick={authenticateToken}>Pesan Kamar</Button>
                 </div>
             </div>
         </>
