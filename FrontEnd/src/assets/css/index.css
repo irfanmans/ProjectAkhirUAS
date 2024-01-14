@@ -25,8 +25,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 30px;
-    color: black;
+    padding: 25px 30px;
+    background-color: rgb(82 82 189);
 }
 .title-navbar h1 {
     font-size: 20px;
@@ -46,24 +46,30 @@
     cursor: pointer;
     color: #fff;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #fdba31;
     text-decoration: none;
     font-size: 15px;
     margin-left: 10px;
-    background-color: rgb(82 82 189);
+    font-weight: 700;
+    text-transform: uppercase;
 }
+
 .btn-menu .btn-nav-register {
     padding: 5px 15px;
     cursor: pointer;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #fdba31;
     text-decoration: none;
     font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .page-title {
     font-family: "Dancing Script";
     font-size: 30px;
+    color: #fff;
 }
 /* End Navbar Pages */
 
@@ -118,6 +124,23 @@
     background-color: rgb(82 82 189);
     color: white;
     cursor: pointer;
+}
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 10px;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #dcdbdb;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #cdcdcd;
+    cursor: pointer;
+}
+.icon-google {
+    font-size: 20px;
 }
 .dont-account {
     text-align: center;
@@ -194,7 +217,7 @@
 
 /* Home Pages */
 .container {
-    padding: 0 30px;
+    padding: 0 90px;
 }
 .first-screen {
     position: relative;
@@ -225,6 +248,9 @@
     margin: 250px auto;
     font-weight: bold;
     color: white;
+}
+.first-screen-caption h1 {
+    font-size: 40px;
 }
 .first-screen-caption p {
     font-weight: 400;
@@ -278,6 +304,7 @@
 .image-about img {
     width: 100%;
     border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .title-fasilitas {
@@ -320,6 +347,29 @@
     font-weight: 200;
 }
 /* End Home */
+
+/* PRODUCT DETAIL */
+
+.main-product {
+    max-width: 600px;
+    margin: 10rem auto 20rem auto;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 20px;
+}
+.container-product {
+    padding: 40px;
+}
+.btn-tambahPesanan {
+    padding: 10px 10px;
+    width: 100%;
+    margin-top: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(82 82 189);
+    color: white;
+    cursor: pointer;
+}
+/* END PRODUCT DETAIL */
 
 /* Footer */
 .wrapper-footer {

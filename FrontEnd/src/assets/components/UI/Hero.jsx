@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button/Button";
+import { NavLink } from "react-router-dom";
 
 export default function Hero() {
     return (
@@ -11,7 +12,9 @@ export default function Hero() {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat suscipit non laborum cum ut facere numquam ducimus praesentium tempore voluptates repellendus nesciunt, minus similique voluptas soluta, corrupti
                         quaerat eaque a?
                     </p>
-                    <Button>Pesan Sekarang</Button>
+                    <NavLink to="/addbook">
+                        <Button>Lihat Daftar Kamar</Button>
+                    </NavLink>
                 </div>
             </div>
         </>
