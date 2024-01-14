@@ -346,6 +346,21 @@
     margin-top: 15px;
     font-weight: 200;
 }
+
+.wrapper-maps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.wrapper-maps iframe{
+    width: 800px;
+    height: 500px;
+    border: none;
+    margin: 20px;
+}
 /* END HOME PAGES */
 
 /* FORM BOOKING */
