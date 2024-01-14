@@ -39,7 +39,7 @@ const Booking = db.define(
   }
 );
 
-export default Booking;
+module.exports =  Booking;
 
 (async () => {
   await db.sync();

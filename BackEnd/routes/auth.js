@@ -1,13 +1,14 @@
 const express = require("express");
-const { createUser } = require("../controllers/userController");
+const userController = require("../controllers/userController");
+
 const router = express.Router();
 router.use(express.json());
 
-router.post("/signup", createUser);
+router.post("/signup", userController.userRegister)
 
-router.post("/login", (req, res) => {
-  const userData = req.body;
-  console.log(userData);
-});
+router.get("/users", userController.getUsers)
+
+router.post("/login", userController.userLogin)
+
 
 module.exports = router;

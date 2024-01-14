@@ -23,7 +23,7 @@ const Room = db.define(
   }
 );
 
-export default Room;
+module.exports =  Room;
 
 (async () => {
   await db.sync();

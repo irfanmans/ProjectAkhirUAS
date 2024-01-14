@@ -1,23 +1,22 @@
 const jwt = require("jsonwebtoken");
+const jwtController = require("../controllers/jwtController.js")
 
-module.exports = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader) {
-    res.status(401).json({ msg: "No Token Provided" });
-    return;
+function authenticateToken(req, res, next) {
+  const token = req.cookies.access_token;
+    console.log(authHeader)
+    if (!token) {
+      return res.status(401);
+    }
+  
+    const result = jwtController.verifyToken(token);
+  
+    if (!result.success) {
+      res.clearCookie("access_token")
+      return res.status(403).json({ error: result.error });
+    }
+  
+    req.user = result.data;
+    next();
   }
 
-  const token = authHeader.split(" ")[1];
-
-  jwt.verify(token, "rahasia", (err, user) => {
-    if (err) {
-      console.error(err);
-      res.status(403).json({ msg: "Token Invalid" });
-      return;
-    }
-
-    req.user = user;
-    next();
-  });
-};
+module.exports = authenticateToken
