@@ -6,6 +6,7 @@ import Login from "./assets/pages/Login";
 import Registrasi from "./assets/pages/Registrasi";
 import Footer from "./assets/components/UI/Footer";
 import FormBook from "./assets/pages/FormBooking";
+import ProductDetail from "./assets/pages/ProductDetail";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/register" element={<Registrasi />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/addbook" element={<FormBook />} />
+                    <Route path="/productdetail" element={<ProductDetail />} />
                 </Routes>
                 <Footer />
             </Router>

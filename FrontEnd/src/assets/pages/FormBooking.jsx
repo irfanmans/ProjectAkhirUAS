@@ -21,7 +21,7 @@ export default function ListProductDetail() {
                             <input type="text" id="durasi" placeholder="Masukkan Durasi Pemesanan" />
                         </div>
                     </form>
-                    <NavLink>
+                    <NavLink to="/productdetail">
                         <Button className="btn-tambahPesanan">Tambah</Button>
                     </NavLink>
                 </div>

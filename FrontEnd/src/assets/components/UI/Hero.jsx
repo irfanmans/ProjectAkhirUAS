@@ -13,7 +13,7 @@ export default function Hero() {
                         quaerat eaque a?
                     </p>
                     <NavLink to="/addbook">
-                        <Button>Lihat Daftar Kamar</Button>
+                        <Button>Pesan Kamar</Button>
                     </NavLink>
                 </div>
             </div>
