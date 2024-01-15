@@ -39,7 +39,15 @@ const userLogin = async (req, res) => {
 
     const token = jwtController.generateToken(user)
     const expiredTime = jwtController.expiredDay * 24 * 60 * 60 * 1000
-    res.cookie("access_token", token, { httpOnly: true, expiresIn: (expiredTime) });
+    res.cookie("access_token", token, {
+      httpOnly: false,
+      sameSite: 'None',
+      secure: false,
+      path: '/',
+      credentials: 'include',  // Ensure credentials are included in the response
+      expiresIn: expiredTime,
+    });
+    console.log(token)
     res.json({ token });
 
   } catch (err) {

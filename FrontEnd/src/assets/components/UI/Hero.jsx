@@ -5,21 +5,18 @@ import axios from "axios";
 
 export default function Hero() {
     const navigate = useNavigate()
-    
-    const authenticateToken = async () =>{
-    try 
-    {
-     const response = await axios.get("http://localhost:3000/", {
-        timeout: 5000
-      });
 
-      navigate('/addbook');
+    const authenticateToken = () => {
+        axios.get("http://localhost:3000/", {
+            timeout: 5000,
+            withCredentials: true,
+        })
+        .then(() => { 
+            navigate('/addbook'); })
+        .catch(() => { 
+            navigate('/login') });
+
     }
-    catch (error)
-    {
-        navigate('/login')
-    }
-  }
     return (
         <>
             <div className="first-screen">
@@ -28,8 +25,8 @@ export default function Hero() {
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat suscipit non laborum cum ut facere numquam ducimus praesentium tempore voluptates repellendus nesciunt, minus similique voluptas soluta, corrupti
                         quaerat eaque a?
-                    </p>              
-                        <Button onClick={authenticateToken}>Pesan Kamar</Button>
+                    </p>
+                    <Button onClick={authenticateToken}>Pesan Kamar</Button>
                 </div>
             </div>
         </>
