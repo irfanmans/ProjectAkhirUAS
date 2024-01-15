@@ -18,8 +18,7 @@ export default function Login() {
         if(!username || !password){
             return
         }
-        axios
-            .post("http://localhost:3000/login", userInformation)
+        axios.post("http://localhost:3000/login", userInformation)
             .then((response) => {
                 navigate("/addbook")
                 console.log("Server response:");

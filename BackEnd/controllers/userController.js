@@ -14,7 +14,7 @@ const getUsers = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
-  console.log("BBBBBBBBBBBB")
+
   try {
     const user = await User.findOne({
       where: {
@@ -26,7 +26,7 @@ const userLogin = async (req, res) => {
       res.status(404);
       return;
     }
-    console.log("CCCCCCCCCCCCCCC")
+
     const isValidPassowrd = await bcrypt.compare(
       req.body.password,
       user.password
@@ -36,10 +36,10 @@ const userLogin = async (req, res) => {
       res.status(401);
       return;
     }
-    console.log("DDDDDDDDDDDDDDDD")
+
     const token = jwtController.generateToken(user)
     const expiredTime = jwtController.expiredDay * 24 * 60 * 60 * 1000
-    res.cookie("access_token", token, { httpOnly: true, expires: new Date(Date.now() + expiredTime) });
+    res.cookie("access_token", token, { httpOnly: true, expiresIn: (expiredTime) });
     res.json({ token });
 
   } catch (err) {

@@ -34,7 +34,7 @@ export default function Registrasi() {
         };
 
         console.log(User)
-        
+
         axios
             .post("http://localhost:3000/signup", User)
             .then((response) => {
@@ -44,7 +44,7 @@ export default function Registrasi() {
                 console.error("Error during registration:", error);
             });
 
-        axios.post("http://localhost:3000/login",)
+        axios.post("http://localhost:3000/login", { username: username, password: password })
             .then(() => {
                 navigate('addbook')
             })
