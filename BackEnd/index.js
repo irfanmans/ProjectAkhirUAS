@@ -28,7 +28,7 @@ app.get("/dropAllDB", (req, res)=>{
 })
 
 app.use(cors());
-app.use(cookieParser)
+app.use(cookieParser())
 app.use(routAuth);
 app.use(routProduk);
 app.use(tokenVerify)
