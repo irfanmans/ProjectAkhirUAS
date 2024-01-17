@@ -5,18 +5,22 @@ import axios from "axios";
 
 export default function Hero() {
     const navigate = useNavigate()
-
+    const token = localStorage.getItem("access_token")
     const authenticateToken = () => {
         axios.get("http://localhost:3000/", {
-            timeout: 5000,
-            withCredentials: true,
-        })
-        .then(() => { 
-            navigate('/addbook'); })
-        .catch(() => { 
-            navigate('/login') });
-
-    }
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(() => {
+            navigate('/addbook');
+          })
+          .catch(() => {
+            localStorage.removeItem('access_token');
+            navigate('/login');
+          });
+      };
+      
     return (
         <>
             <div className="first-screen">

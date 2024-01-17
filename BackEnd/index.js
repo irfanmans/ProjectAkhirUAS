@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const mysql = require("mysql2");
-const cookieParser = require("cookie-parser")
 
 const routAuth = require("./routes/auth");
 const routProduk = require("./routes/list-produk");
@@ -20,7 +18,6 @@ app.get("/dropAllDB", (req, res)=>{
       } catch (error) {
         console.error('Error dropping tables:', error);
       } finally {
-        // Close the Sequelize connection
         await database.close();
       }
     };
@@ -28,7 +25,6 @@ app.get("/dropAllDB", (req, res)=>{
 })
 
 app.use(cors());
-app.use(cookieParser())
 app.use(routAuth);
 app.use(routProduk);
 app.use(tokenVerify)

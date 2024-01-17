@@ -20,6 +20,9 @@ export default function Login() {
         }
         axios.post("http://localhost:3000/login", userInformation)
             .then((response) => {
+                
+                localStorage.setItem("access_token", response.data.token)
+                
                 navigate("/addbook")
                 console.log("Server response:");
             })
