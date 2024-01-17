@@ -39,17 +39,11 @@ export default function Registrasi() {
             .post("http://localhost:3000/signup", User)
             .then((response) => {
                 console.log("Server response:");
+                navigate('/addbook')
             })
             .catch((error) => {
                 console.error("Error during registration:", error);
             });
-
-        axios.post("http://localhost:3000/login", { username: username, password: password })
-            .then(() => {
-                navigate('addbook')
-            })
-            .catch((err) => {
-            })
     };
 
     return (
