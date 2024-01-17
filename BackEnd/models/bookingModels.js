@@ -15,22 +15,22 @@ const Booking = db.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    duration: {
-      type: DataTypes.INTEGER,
+    checkOut: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     userId: {
-      type: DataTypes.STRING,
-      references: {
-        model: User,
-        key: "username",
-      },
-    },
-    roomId: {
       type: DataTypes.INTEGER,
       references: {
-        model: Room,
-        key: "roomId",
+        model: User,
+        key: "id",
+      },
+      roomId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Room,
+          key: "id",
+        },
       },
     },
   },
