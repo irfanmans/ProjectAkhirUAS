@@ -14,10 +14,11 @@ const getUsers = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
+
   try {
     const user = await User.findOne({
       where: {
-        username: req.body.name,
+        username: req.body.username,
       },
     });
 
@@ -37,8 +38,6 @@ const userLogin = async (req, res) => {
     }
 
     const token = jwtController.generateToken(user)
-    const expiredTime = jwtController.expiredDay * 24 * 60 * 60 * 1000
-    res.cookie("access_token", token, { httpOnly: true, expires: new Date(Date.now() + expiredTime) });
     res.json({ token });
 
   } catch (err) {
@@ -48,6 +47,7 @@ const userLogin = async (req, res) => {
 };
 
 const userRegister = async (req, res) => {
+
   try {
     const existingUser = await User.findOne({
       where: { username: req.body.name }

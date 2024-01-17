@@ -1,24 +1,29 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "../components/Button/Button";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
+    const navigate = useNavigate()
     const LoginAccount = (event) => {
         event.preventDefault();
-
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-
         const userInformation = {
             username: username,
             password: password,
         };
 
-        axios
-            .post("http://localhost:3000/login", userInformation)
+        if(!username || !password){
+            return
+        }
+        axios.post("http://localhost:3000/login", userInformation)
             .then((response) => {
+                
+                localStorage.setItem("access_token", response.data.token)
+                
+                navigate("/addbook")
                 console.log("Server response:");
             })
             .catch((error) => {
