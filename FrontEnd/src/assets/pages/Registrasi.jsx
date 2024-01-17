@@ -3,92 +3,113 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 import axios from "axios";
 
+const navigate = useNavigate();
+
 export default function Registrasi() {
-    const navigate = useNavigate()
-    const RegisterUserAccount = (event) => {
-        event.preventDefault();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [noHp, setNoHp] = useState("");
+  const [password, setPassword] = useState("");
 
-        const username = document.getElementById("fullname").value;
-        const email = document.getElementById("email").value;
-        const noHp = document.getElementById("noHandphone").value;
-        const password = document.getElementById("password").value;
+  const handleRegister = (event) => {
+    event.preventDefault();
+    if (!email.includes("@") || !email.includes(".com")) {
+      alert("Please check the email");
+      return;
+    }
 
-        if (!email.includes("@") || !email.includes(".com")) {
-            alert("Please check the email");
-            return;
-        }
-        const numericRegex = /^[0-9]+$/;
-        const isValidPhoneNumber = numericRegex.test(noHp);
+    const numericRegex = /^[0-9]+$/;
+    const isValidPhoneNumber = numericRegex.test(noHp);
+    if (!isValidPhoneNumber) {
+      alert("Please check the phone number");
+      return;
+    }
 
-        if (!isValidPhoneNumber) {
-            alert("Please check the phone number");
-            return;
-        }
-
-        // const token = localStorage.getItem('jwtToken');
-        const User = {
-            name: username,
-            password: password,
-            no_hp: noHp,
-            email: email,
-        };
-
-        console.log(User)
-
-        axios
-            .post("http://localhost:3000/signup", User)
-            .then((response) => {
-                console.log("Server response:");
-            })
-            .catch((error) => {
-                console.error("Error during registration:", error);
-            });
-
-        axios.post("http://localhost:3000/login", { username: username, password: password })
-            .then(() => {
-                navigate('addbook')
-            })
-            .catch((err) => {
-            })
+    const user = {
+      username: username,
+      email: email,
+      phone_number: noHp,
+      password: password,
     };
 
-    return (
-        <React.Fragment>
-            <article className="main-register">
-                <div className="wrapper-register">
-                    <div className="title-register">
-                        <h1>REGISTRASI</h1>
-                        <p>Silahkan registrasi akun anda</p>
-                    </div>
-                    <form className="main-form" action="">
-                        <div className="form-group">
-                            <label htmlFor="fullname">FullName</label>
-                            <input type="text" id="fullname" placeholder="Masukkan FullName" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" placeholder="Masukkan Email" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="noHandphone">Nomor Handphone</label>
-                            <input type="tel" id="noHandphone" placeholder="Masukkan No Handphone" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" placeholder="Masukkan Password" />
-                        </div>
-                    </form>
-                    <button type="button" className="btn-register" onClick={RegisterUserAccount}>
-                        Daftar Akun
-                    </button>
+    axios
+      .post("http://localhost:3000/signup", user)
+      .then((response) => {
+        alert("Registrasi berhasil!");
+        console.log("Server response:", response);
+        navigate("/login");
+      })
+      .catch((error) => {
+        alert("Registrasi gagal!");
+        console.error("Error during registration:", error);
+      });
+  };
 
-                    <div className="already-account">
-                        <span>
-                            Sudah memiliki akun? <NavLink to="/login">Login</NavLink>
-                        </span>
-                    </div>
-                </div>
-            </article>
-        </React.Fragment>
-    );
+  return (
+    <>
+      <article className="main-register">
+        <div className="wrapper-register">
+          <div className="title-register">
+            <h1>REGISTRASI</h1>
+            <p>Silahkan registrasi akun anda</p>
+          </div>
+          <form className="main-form" action="">
+            <div className="form-group">
+              <label htmlFor="fullname">FullName</label>
+              <input
+                type="text"
+                id="fullname"
+                placeholder="Masukkan FullName"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Masukkan Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="noHandphone">Nomor Handphone</label>
+              <input
+                type="tel"
+                id="noHandphone"
+                placeholder="Masukkan No Handphone"
+                value={noHp}
+                onChange={(e) => setNoHp(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Masukkan Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </form>
+          <button
+            type="button"
+            className="btn-register"
+            onClick={handleRegister}
+          >
+            Daftar Akun
+          </button>
+
+          <div className="already-account">
+            <span>
+              Sudah memiliki akun? <NavLink to="/">Login</NavLink>
+            </span>
+          </div>
+        </div>
+      </article>
+    </>
+  );
 }

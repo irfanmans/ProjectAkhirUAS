@@ -1,12 +1,11 @@
 const User = require("../models/userModels.js");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const jwtController = require("./jwtController.js")
+const jwtController = require("./jwtController.js");
 
 const getUsers = async (req, res) => {
   try {
     const response = await User.findAll();
-    console.log(response)
+    console.log(response);
     res.status(200).json(response);
   } catch (err) {
     console.error(err);
@@ -14,7 +13,6 @@ const getUsers = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
-
   try {
     const user = await User.findOne({
       where: {
@@ -32,14 +30,13 @@ const userLogin = async (req, res) => {
       user.password
     );
     if (!isValidPassowrd) {
-      console.log("password is not valid")
+      console.log("password is not valid");
       res.status(401);
       return;
     }
 
     const token = jwtController.generateToken(user)
     res.json({ token });
-
   } catch (err) {
     console.error(err);
     res.status(400);
@@ -47,31 +44,57 @@ const userLogin = async (req, res) => {
 };
 
 const userRegister = async (req, res) => {
-
   try {
-    const existingUser = await User.findOne({
-      where: { username: req.body.name }
-    });
-
-    if (existingUser) {
-      return res.status(400).json({ msg: "Username already exists" });
+    if (!req.body.username) {
+      return res.status(400).json({
+        error: "Username is required",
+      });
     }
+    if (!req.body.email) {
+      return res.status(400).json({
+        error: "Email is required",
+      });
+    }
+    if (!req.body.password) {
+      return res.status(400).json({
+        error: "Password is required",
+      });
+    }
+    if (!req.body.phone_number) {
+      return res.status(400).json({
+        error: "Phone number is required",
+      });
+    }
+
+    const existingUser = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+    if (existingUser) {
+      return res.status(400).json({
+        error: "Username already exists",
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    await User.create({
-      username: req.body.name,
+    const newUser = await User.create({
+      username: req.body.username,
       password: hashedPassword,
       email: req.body.email,
-      phone_number: req.body.no_hp
+      phone_number: req.body.phone_number,
     });
-    res.status(201).json({ msg: "User Created" });
-  } catch (err) {
+    res.status(201).json({
+      msg: "User created successfully",
+    });
+  } catch (error) {
     console.error(err);
     res.status(500).json({ msg: "Error Creating User" });
   }
 };
 
 module.exports = {
-  "getUsers": getUsers,
-  "userRegister": userRegister,
-  "userLogin": userLogin
-}
+  getUsers: getUsers,
+  userRegister: userRegister,
+  userLogin: userLogin,
+};
