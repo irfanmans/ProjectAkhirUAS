@@ -38,6 +38,7 @@ export default function Registrasi() {
         axios
             .post("http://localhost:3000/signup", User)
             .then((response) => {
+                localStorage.setItem("access_token", response.data.token)
                 console.log("Server response:");
                 navigate('/addbook')
             })

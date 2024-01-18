@@ -40,7 +40,6 @@ const bookingRoom = async (req, res) => {
 const getAllBookingRooms = async (req, res) => {
   try {
     const bookings = await BookingRoom.findAll();
-    console.log(bookings); // Log the retrieved bookings to the console for debugging purposes
     res.status(200).json(bookings);
   } catch (err) {
     console.error('Error getting all booking rooms:', err.message);
