@@ -15,7 +15,7 @@ const getUsers = async (req, res) => {
 const userLogin = async (req, res) => {
 
   try {
-    console.log("AAAAAAAAAAAAAAA")
+
     const user = await User.findOne({
       where: {
         username: req.body.username,
@@ -26,7 +26,7 @@ const userLogin = async (req, res) => {
       res.status(404);
       return;
     }
-    console.log("BBBBBBBBBBBBBBBBB")
+
     const isValidPassowrd = await bcrypt.compare(
       req.body.password,
       user.password
@@ -36,7 +36,7 @@ const userLogin = async (req, res) => {
       res.status(401);
       return;
     }
-    console.log("CCCCCCCCCCCCCCCCCCC")
+
     
     const token = jwtController.generateToken(user)
     res.json({ token });

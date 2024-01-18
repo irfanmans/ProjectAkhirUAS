@@ -22,11 +22,11 @@ const bookingRoom = async (req, res) => {
         if (isRoomOccupied) {
             return res.status(400).json({ message: 'Room is already occupied for the specified date range.' });
         }
-
+        console.log(req.userBook)
         const booking = await BookingRoom.create({
             checkIn: req.body.checkIn,
             duration: req.body.duration,
-            userId: req.user.username,
+            userId: req.userBook.username,
             roomId: req.body.roomId,
         });
 

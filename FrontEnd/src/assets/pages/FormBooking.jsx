@@ -8,12 +8,23 @@ export default function ListProductDetail() {
         const getRoomId = document.getElementById("noKamar").value
         const getDateOrder = document.getElementById("tglPesan").value
         const getDuration = document.getElementById("durasi").value
-
-        axios.post("localhost:3000/room",{roomId:getRoomId, checkIn:getDateOrder, duration:getDuration})
-        .then(()=>{
-            alert("Have been Booked")
+        const token = localStorage.getItem("access_token")
+        axios.post("http://localhost:3000/room", {
+            roomId: getRoomId,
+            checkIn: getDateOrder,
+            duration: getDuration
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
         })
-        .catch()
+        .then(() => {
+            alert("Have been Booked");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
     return (
         <>
