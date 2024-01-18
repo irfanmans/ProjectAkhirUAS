@@ -10,6 +10,7 @@ const Booking = db.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      unique: true
     },
     checkIn: {
       type: DataTypes.DATE,
@@ -36,8 +37,21 @@ const Booking = db.define(
   },
   {
     freezeTableName: true,
+    indexes: [
+      {
+        name: 'booking_room_id_index',
+        fields: ['roomId'],
+      },
+    ],
   }
 );
+
+module.exports = Booking;
+
+(async () => {
+  await db.sync();
+})();
+
 
 module.exports =  Booking;
 

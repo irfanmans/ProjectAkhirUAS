@@ -7,6 +7,7 @@ const Room = db.define(
     roomId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      unique: true
     },
     price: {
       type: DataTypes.STRING,
