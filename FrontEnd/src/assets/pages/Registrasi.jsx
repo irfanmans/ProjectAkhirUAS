@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 import axios from "axios";
 
 export default function Registrasi() {
+    const navigate = useNavigate()
     const RegisterUserAccount = (event) => {
         event.preventDefault();
 
@@ -32,10 +33,14 @@ export default function Registrasi() {
             email: email,
         };
 
+        console.log(User)
+
         axios
             .post("http://localhost:3000/signup", User)
             .then((response) => {
+                localStorage.setItem("access_token", response.data.token)
                 console.log("Server response:");
+                navigate('/addbook')
             })
             .catch((error) => {
                 console.error("Error during registration:", error);
@@ -74,7 +79,7 @@ export default function Registrasi() {
 
                     <div className="already-account">
                         <span>
-                            Sudah memiliki akun? <NavLink to="/">Login</NavLink>
+                            Sudah memiliki akun? <NavLink to="/login">Login</NavLink>
                         </span>
                     </div>
                 </div>

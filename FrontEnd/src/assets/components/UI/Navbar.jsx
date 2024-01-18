@@ -6,7 +6,7 @@ export default function Navbar() {
         <React.Fragment>
             <header className="wrapper-navbar">
                 <div className="title-navbar">
-                    <NavLink to="/home">
+                    <NavLink to="/">
                         <h1 className="page-title">The Heavenly Resort</h1>
                     </NavLink>
                 </div>
@@ -14,7 +14,7 @@ export default function Navbar() {
                     <NavLink className="btn-nav-register" to="/register">
                         Register
                     </NavLink>
-                    <NavLink className="btn-nav-login" to="/">
+                    <NavLink className="btn-nav-login" to="/login">
                         Login
                     </NavLink>
                 </div>

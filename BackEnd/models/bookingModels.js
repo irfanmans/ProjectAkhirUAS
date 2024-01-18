@@ -10,34 +10,48 @@ const Booking = db.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      unique: true
     },
     checkIn: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    checkOut: {
-      type: DataTypes.DATE,
+    duration: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     userId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       references: {
         model: User,
-        key: "id",
+        key: "username",
       },
-      roomId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: Room,
-          key: "id",
-        },
+    },
+    roomId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Room,
+        key: "roomId",
       },
     },
   },
   {
     freezeTableName: true,
+    indexes: [
+      {
+        name: 'booking_room_id_index',
+        fields: ['roomId'],
+      },
+    ],
   }
 );
+
+module.exports = Booking;
+
+(async () => {
+  await db.sync();
+})();
+
 
 module.exports =  Booking;
 

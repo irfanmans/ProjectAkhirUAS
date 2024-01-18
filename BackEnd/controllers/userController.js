@@ -1,6 +1,5 @@
 const User = require("../models/userModels.js");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const jwtController = require("./jwtController.js")
 
 const getUsers = async (req, res) => {
@@ -14,10 +13,12 @@ const getUsers = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
+
   try {
+
     const user = await User.findOne({
       where: {
-        username: req.body.name,
+        username: req.body.username,
       },
     });
 
@@ -36,9 +37,8 @@ const userLogin = async (req, res) => {
       return;
     }
 
+    
     const token = jwtController.generateToken(user)
-    const expiredTime = jwtController.expiredDay * 24 * 60 * 60 * 1000
-    res.cookie("access_token", token, { httpOnly: true, expires: new Date(Date.now() + expiredTime) });
     res.json({ token });
 
   } catch (err) {
@@ -48,6 +48,7 @@ const userLogin = async (req, res) => {
 };
 
 const userRegister = async (req, res) => {
+
   try {
     const existingUser = await User.findOne({
       where: { username: req.body.name }
@@ -63,7 +64,8 @@ const userRegister = async (req, res) => {
       email: req.body.email,
       phone_number: req.body.no_hp
     });
-    res.status(201).json({ msg: "User Created" });
+    const token = jwtController.generateToken({name:req.body.name, password:hashedPassword})
+    res.json({ token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Error Creating User" });
