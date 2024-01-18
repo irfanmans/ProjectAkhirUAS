@@ -65,7 +65,7 @@ const userRegister = async (req, res) => {
       phone_number: req.body.no_hp
     });
     const token = jwtController.generateToken({name:req.body.name, password:hashedPassword})
-    res.status(201).json({ msg: "User Created" });
+    res.json({ token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Error Creating User" });
