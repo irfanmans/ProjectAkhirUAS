@@ -13,7 +13,7 @@ export default function ListProductDetail() {
     const token = localStorage.getItem("access_token");
     axios
       .post(
-        "https://project-akhir-uas-nine.vercel.app/room",
+        "https://server-production-backend.up.railway.app/room",
         {
           roomId: getRoomId,
           checkIn: getDateOrder,

@@ -19,7 +19,10 @@ export default function Login() {
       return;
     }
     axios
-      .post("https://project-akhir-uas-nine.vercel.app/login", userInformation)
+      .post(
+        "https://server-production-backend.up.railway.app/login",
+        userInformation
+      )
       .then((response) => {
         localStorage.setItem("access_token", response.data.token);
 
