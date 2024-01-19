@@ -11,6 +11,14 @@ const orderController = require("./controllers/orderController.js");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+const allowedOrigins = ["https://project-akhir-uas-frontend.vercel.app"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
+
 app.get("/dropAllDB", (req, res) => {
   const dropAllTables = async () => {
     try {
@@ -26,7 +34,6 @@ app.get("/dropAllDB", (req, res) => {
   dropAllTables();
 });
 
-app.use(cors());
 app.use(routAuth);
 app.use(routProduk);
 app.get("/getBookingRooms", orderController.getBookingRoom);

@@ -36,7 +36,7 @@ export default function Registrasi() {
     console.log(User);
 
     axios
-      .post("http://localhost:3000/signup", User)
+      .post("https://project-akhir-uas-nine.vercel.app/signup", User)
       .then((response) => {
         localStorage.setItem("access_token", response.data.token);
         console.log("Server response:");
