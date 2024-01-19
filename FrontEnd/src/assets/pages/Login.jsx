@@ -28,6 +28,7 @@ export default function Login() {
             })
             .catch((error) => {
                 console.error("Error during registration:", error);
+                alert("Gagal login")
             });
     };
 

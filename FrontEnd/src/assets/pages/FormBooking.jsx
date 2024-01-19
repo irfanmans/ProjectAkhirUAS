@@ -29,7 +29,6 @@ export default function ListProductDetail() {
       .then(() => {
         const queryParams = `?roomNumber=${getRoomId}&bookingDate=${getDateOrder}&duration=${getDuration}`;
         navigate("/productdetail" + queryParams);
-        alert("Have been Booked");
       })
       .catch((error) => {
         console.log(error);

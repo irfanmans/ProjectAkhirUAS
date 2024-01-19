@@ -44,6 +44,7 @@ export default function Registrasi() {
             })
             .catch((error) => {
                 console.error("Error during registration:", error);
+                alert("Silahkan periksa data anda, atau cari username yang lain")
             });
     };
 
