@@ -16,6 +16,8 @@ const allowedOrigins = ["https://project-akhir-uas-frontend.vercel.app"];
 app.use(
   cors({
     origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
