@@ -6,10 +6,12 @@ import axios from "axios";
 export default function Hero() {
     const navigate = useNavigate()
     const token = localStorage.getItem("access_token")
+    const googleToken = localStorage.getItem("google_token")
+    const tokenToUse = googleToken || token
     const authenticateToken = () => {
         axios.get("http://localhost:3000/", {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${tokenToUse}`
             }
           })
           .then(() => {
@@ -17,6 +19,7 @@ export default function Hero() {
           })
           .catch(() => {
             localStorage.removeItem('access_token');
+            localStorage.removeItem("google_token")
             navigate('/login');
           });
       };
