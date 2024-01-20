@@ -35,6 +35,18 @@ export default function Login() {
       });
   };
 
+  const googleOauthLogin = ()=>{
+    axios.get("https://server-production-backend.up.railway.app/auth/google")
+    .then((response)=>{
+      localStorage.setItem("google_token", response.data.token)
+      navigate("/addbook");
+      console.log("Server response:");
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
   return (
     <React.Fragment>
       <article className="main-login">
@@ -64,7 +76,7 @@ export default function Login() {
           <Button className="btn-login" onClick={LoginAccount}>
             Masuk
           </Button>
-          <Button className="btn-google" onClick={LoginAccount}>
+          <Button className="btn-google" onClick={googleOauthLogin}>
             <FcGoogle className="icon-google" /> Login with Google
           </Button>
           <div className="dont-account">
