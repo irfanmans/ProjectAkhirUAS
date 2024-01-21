@@ -7,7 +7,7 @@ export default function Hero() {
     const navigate = useNavigate()
     const token = localStorage.getItem("access_token")
     const authenticateToken = () => {
-        axios.get("https://server-production-backend.up.railway.app/login", {
+        axios.get("https://server-production-backend.up.railway.app/", {
             headers: {
               Authorization: `Bearer ${token}`
             }
